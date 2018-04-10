@@ -5,7 +5,7 @@ public class OverloadFrame extends Frame {
 	private boolean isActive;
 	
 	public OverloadFrame() {
-		super();
+		super(OVERLOAD_FRAME_ID);
 	}
 	
 	public void setActive(boolean active) {

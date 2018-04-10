@@ -2,13 +2,12 @@ package frame;
 
 public class RemoteFrame extends Frame {
 	
-	private short id;
 	private byte dataLength;
 	private short crc;
 	private byte ack;
 	
 	public RemoteFrame(short id) {
-		super();
+		super(id);
 		this.id = id;
 	}
 
