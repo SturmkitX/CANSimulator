@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Observable;
 
-@SuppressWarnings("deprecation")
 public class Bus extends Observable implements Runnable {
 	
 	private static Date date;
