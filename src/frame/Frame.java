@@ -4,7 +4,12 @@ public abstract class Frame implements Comparable<Frame> {
 
 	public static final short MAX_AVAILABLE_ID = 2047;		// maximum that can be stored on 11 bits (Short.MAX_VALUE & 0x7FF)
 
-	protected short id;
+	/*
+	All the fields of a Frame will be represented using ints and Object for variable sizes
+	When the message will be computed as a byte array for CRC check, the actual specification sizes will be used
+	 */
+
+	protected int id;
 	
 	protected byte[] message;
 	
@@ -13,7 +18,7 @@ public abstract class Frame implements Comparable<Frame> {
 		this.id = MAX_AVAILABLE_ID;
 	}
 
-	public Frame(short id) {
+	public Frame(int id) {
 		this.message = null;
 		this.id = id;
 	}
@@ -24,7 +29,7 @@ public abstract class Frame implements Comparable<Frame> {
 		return message;
 	}
 
-	public short getId() {
+	public int getId() {
 		return id;
 	}
 

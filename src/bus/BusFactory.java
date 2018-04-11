@@ -3,11 +3,12 @@ package bus;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BusInstanceHandler {
+public class BusFactory {
 
     private static List<Bus> buses = new ArrayList<>();
 
-    private BusInstanceHandler() {
+    private BusFactory() {
+
     }
 
     public static void createBus() {
@@ -15,13 +16,15 @@ public class BusInstanceHandler {
     }
 
     public static Bus getBus(int index) {
-        Bus found;
+        Bus found = null;
         try {
             found = buses.get(index);
         } catch(IndexOutOfBoundsException e) {
-            found = null;
+            e.printStackTrace();
         }
 
         return found;
     }
+
+
 }

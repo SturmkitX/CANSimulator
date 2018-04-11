@@ -8,7 +8,7 @@ import java.util.*;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.PriorityBlockingQueue;
 
-public class Bus extends Observable implements Runnable {
+public class Bus extends Observable {
 	
 	private static Date date;
 	private static DateFormat df;
@@ -36,13 +36,6 @@ public class Bus extends Observable implements Runnable {
 		Frame imp = frames.take();
 		setChanged();
 		notifyObservers(imp);
-	}
-
-
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
 	}
 
 }

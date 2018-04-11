@@ -1,22 +1,20 @@
 package controller;
 
 import java.util.*;
-import java.util.concurrent.LinkedBlockingQueue;
 
 import bus.Bus;
-import bus.BusInstanceHandler;
 import frame.Frame;
 
 public abstract class Controller extends Observable implements Observer {
 
-	protected short id;
+	protected int id;
 	protected List<Short> acceptedIds;
-	protected List<Bus> buses;
+	protected Bus bus;
 	
-	public Controller(short id) {
+	public Controller(int id) {
 		this.id = id;
 		this.acceptedIds = new ArrayList<>();
-		this.buses = new ArrayList<>();
+		this.bus = null;
 		setAcceptedIds();
 	}
 
@@ -32,9 +30,9 @@ public abstract class Controller extends Observable implements Observer {
 	}
 
 
-	public void write(int busId, Frame frame) {
+	public void write(Frame frame) {
 		try {
-			buses.get(busId).queueFrame(frame);
+			bus.queueFrame(frame);
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
@@ -50,11 +48,8 @@ public abstract class Controller extends Observable implements Observer {
 		}
 	}
 
-	public void attachBus(int index) {
-		Bus found = BusInstanceHandler.getBus(index);
-		if(found != null) {
-			buses.add(found);
-		}
-		found.addObserver(this);
+	public void attachBus(Bus bus) {
+		this.bus = bus;
 	}
+
 }

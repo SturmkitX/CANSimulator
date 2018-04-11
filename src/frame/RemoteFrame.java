@@ -2,13 +2,23 @@ package frame;
 
 public class RemoteFrame extends Frame {
 	
-	private byte dataLength;
-	private short crc;
-	private byte ack;
-	
+	private int dataLength;
+	private int crc;
+
 	public RemoteFrame(short id) {
 		super(id);
-		this.id = id;
+	}
+
+	public void setDataLength(int dataLength) {
+		this.dataLength = dataLength;
+	}
+
+	public int getDataLength() {
+		return dataLength;
+	}
+
+	public int getCrc() {
+		return crc;
 	}
 
 	@Override
