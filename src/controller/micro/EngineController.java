@@ -1,6 +1,7 @@
 package controller.micro;
 
 import controller.MicroController;
+import frame.Frame;
 
 import java.util.Observable;
 import java.util.Timer;
@@ -29,6 +30,8 @@ public class EngineController extends MicroController {
 
     @Override
     public void update(Observable o, Object arg) {
+        Frame frame = (Frame)arg;
 
+        // check if it is a data frame sent by this controller
     }
 }

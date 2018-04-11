@@ -1,11 +1,13 @@
 package frame;
 
+import codes.RequestCode;
+
 public class OverloadFrame extends Frame {
 	
 	private boolean isActive;
 	
 	public OverloadFrame() {
-		super(OVERLOAD_FRAME_ID);
+		super(RequestCode.OVERLOAD);
 	}
 	
 	public void setActive(boolean active) {

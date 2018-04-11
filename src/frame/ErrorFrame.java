@@ -1,11 +1,13 @@
 package frame;
 
+import codes.RequestCode;
+
 public class ErrorFrame extends Frame {
 	
 	private boolean isActive;
 	
 	public ErrorFrame() {
-		super(ERROR_FRAME_ID);
+		super(RequestCode.ERROR);
 	}
 	
 	public void setActive(boolean active) {
