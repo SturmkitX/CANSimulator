@@ -35,10 +35,7 @@ public class MainStarter {
 //        engineThread.start();
         engineMicro.run();
 
-        // send a simple data request
-        RemoteFrame testFrame = new RemoteFrame(RequestCode.ENGINE_TEMP_GET);
-        testFrame.setDataLength(4);
-        engineCAN.write(testFrame);
+
 
     }
 }

@@ -29,6 +29,10 @@ public abstract class Controller extends Observable implements Observer {
 	}
 
 
+	public int getId() {
+		return id;
+	}
+
 	public void attachBus(Bus bus) {
 		this.bus = bus;
 	}
