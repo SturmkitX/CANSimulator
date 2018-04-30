@@ -14,7 +14,7 @@ import java.util.TimerTask;
 
 public class EngineController extends MicroController {
 
-    private Timer timer;
+    private transient Timer timer;
     private int temperature;
     private int rotations;
 
@@ -23,6 +23,19 @@ public class EngineController extends MicroController {
         timer = new Timer();
         temperature = 0;
         rotations = 0;
+    }
+
+    @Override
+    public void initializeTransientFields() {
+        timer = new Timer();
+    }
+
+    public Timer getTimer() {
+        return timer;
+    }
+
+    public void setTimer(Timer timer) {
+        this.timer = timer;
     }
 
     @Override

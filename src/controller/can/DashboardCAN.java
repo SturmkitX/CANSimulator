@@ -2,6 +2,7 @@ package controller.can;
 
 import controller.Controller;
 import frame.Frame;
+import utils.UserSession;
 
 import java.util.Observable;
 
@@ -14,7 +15,7 @@ public class DashboardCAN extends Controller {
     @Override
     public void update(Observable o, Object arg) {
         Frame frame = (Frame)arg;
-        System.out.println(String.format("CAN Controller received frame at time %s\n", bus.getTime()));
+        UserSession.appendLog(String.format("[%s]: Dashboard CAN Controller received frame\n\n", bus.getTime()));
 
         if(!checkError(frame)) {
             return;

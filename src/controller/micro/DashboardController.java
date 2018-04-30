@@ -18,6 +18,11 @@ public class DashboardController extends MicroController {
     }
 
     @Override
+    public void initializeTransientFields() {
+
+    }
+
+    @Override
     public void run() {
 
     }

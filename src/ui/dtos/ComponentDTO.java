@@ -11,12 +11,13 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 
+import java.io.Serializable;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-public class ComponentDTO {
+public class ComponentDTO implements Serializable {
     private ComponentSet source;
     private IntegerProperty canId;
     private IntegerProperty microId;
@@ -68,9 +69,9 @@ public class ComponentDTO {
 
     private void computeButtons() {
         for(Method m : source.getMicro().getClass().getMethods()) {
-            System.out.println(m.getName() + " " + m.getAnnotations().length);
+//            System.out.println(m.getName() + " " + m.getAnnotations().length);
             for(Annotation a : m.getAnnotations()) {
-                System.out.println(m.getName() + " " + a);
+//                System.out.println(m.getName() + " " + a);
                 if(a.toString().equals("@controller.micro.MenuAccess()")) {
                     Button b = new Button();
                     b.setText(m.getName());

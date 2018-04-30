@@ -1,6 +1,8 @@
 package frame;
 
-public abstract class Frame implements Comparable<Frame> {
+import java.io.Serializable;
+
+public abstract class Frame implements Comparable<Frame>, Serializable {
 
 	public static final short MAX_AVAILABLE_ID = 2047;		// maximum that can be stored on 11 bits (Short.MAX_VALUE & 0x7FF)
 

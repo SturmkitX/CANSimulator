@@ -2,25 +2,25 @@ package controllers;
 
 import bus.BusFactory;
 import controller.sets.ComponentSet;
-import controller.sets.DashboardSet;
-import controller.sets.EngineSet;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.MultipleSelectionModel;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import ui.dtos.ComponentDTO;
+import utils.UserSession;
 
+import java.io.*;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainController implements Initializable {
@@ -43,7 +43,7 @@ public class MainController implements Initializable {
     private Text componentMicroId; // Value injected by FXMLLoader
 
     @FXML // fx:id="logText"
-    private Text logText; // Value injected by FXMLLoader
+    private TextArea logText; // Value injected by FXMLLoader
 
     @FXML // fx:id="loadMenu"
     private MenuItem loadMenu; // Value injected by FXMLLoader
@@ -69,21 +69,74 @@ public class MainController implements Initializable {
     }
 
     @FXML
-    void insertComponent(MouseEvent event) {
+    void insertComponent(ActionEvent event) {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("../ui/add_comp.fxml"));
+            Scene scene = new Scene(root);
 
+            Stage stage = new Stage();
+            stage.setTitle("Add component");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+    }
+
+    @FXML
+    void delComponent(ActionEvent event) {
+        ComponentDTO selected = drawnComponents.getSelectionModel().getSelectedItem();
+        if(selected != null) {
+            componentList.remove(selected);
+        }
+        System.out.println(componentList.size() + " " + drawnComponents.getItems().size());
+
+    }
+
+    @FXML
+    void loadObjects(ActionEvent event) {
+        try {
+            ObjectInput fin = new ObjectInputStream(new FileInputStream("components.ser"));
+            List<ComponentSet> comps = (ArrayList<ComponentSet>) fin.readObject();
+            fin.close();
+
+            componentList.clear();
+            for(ComponentSet cs : comps) {
+                cs.getMicro().initializeTransientFields();
+                componentList.add(new ComponentDTO(cs));
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void saveObjects(ActionEvent event) {
+        List<ComponentSet> comps = new ArrayList<>();
+        for(ComponentDTO dto : componentList) {
+            comps.add(dto.getSource());
+        }
+
+        try {
+            ObjectOutput fout = new ObjectOutputStream(new FileOutputStream("components.ser"));
+            fout.writeObject(comps);
+            fout.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        componentList = FXCollections.observableList(new ArrayList<>());
+        componentList = UserSession.getComponents();
         drawnComponents.setItems(componentList);
 
         BusFactory.createBus();
-        ComponentSet cs = new EngineSet(0, BusFactory.getBus(0));
-        componentList.add(new ComponentDTO(cs));
-
-        ComponentSet cs2 = new DashboardSet(1, BusFactory.getBus(0));
-        componentList.add(new ComponentDTO(cs2));
 
         drawnComponents.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ComponentDTO>() {
             @Override
@@ -95,6 +148,8 @@ public class MainController implements Initializable {
                 componentActions.setItems(newValue.buttonsProperty());
             }
         });
+
+        logText.textProperty().bind(UserSession.logProperty());
 
     }
 }

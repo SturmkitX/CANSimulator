@@ -1,11 +1,12 @@
 package controller;
 
+import java.io.Serializable;
 import java.util.*;
 
 import bus.Bus;
 import frame.Frame;
 
-public abstract class Controller extends Observable implements Observer {
+public abstract class Controller extends Observable implements Observer, Serializable {
 
 	protected int id;
 	protected Bus bus;
