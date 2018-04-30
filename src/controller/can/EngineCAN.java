@@ -1,7 +1,5 @@
 package controller.can;
 
-import bus.Bus;
-import codes.RequestCode;
 import controller.Controller;
 import frame.Frame;
 
@@ -14,15 +12,10 @@ public class EngineCAN extends Controller {
     }
 
     @Override
-    protected void setAcceptedIds() {
-        addAcceptedIds(RequestCode.ENGINE_ROT_GET, RequestCode.ENGINE_TEMP_GET);
-    }
-
-    @Override
     public void update(Observable o, Object arg) {
         Frame frame = (Frame)arg;
 
-        if(!(checkAcceptedId(frame) && checkError(frame))) {
+        if(!checkError(frame)) {
             return;
         }
 

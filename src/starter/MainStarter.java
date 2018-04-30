@@ -35,7 +35,7 @@ public class MainStarter {
         engineThread.start();
 
         // send a simple data request
-        RemoteFrame testFrame = new RemoteFrame(RequestCode.ENGINE_TEMP_GET);
+        RemoteFrame testFrame = new RemoteFrame(RequestCode.ENGINE_TEMP);
         testFrame.setDataLength(4);
         engineCAN.write(testFrame);
 

@@ -9,7 +9,7 @@ public class RequestCode {
     public static final short ERROR = 0;
     public static final short OVERLOAD = 1;
 
-    public static final short ENGINE_TEMP_GET = 100;
-    public static final short ENGINE_ROT_GET = 150;
+    public static final short ENGINE_TEMP = 100;
+    public static final short ENGINE_ROT = 150;
 
 }

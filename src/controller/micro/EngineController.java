@@ -42,11 +42,11 @@ public class EngineController extends MicroController {
         Frame result = null;
 
         // send the correct data to the microcontroller, based on request or data
-        switch(frame.getId()) {
-            case RequestCode.ENGINE_TEMP_GET : result = getTemperature((RemoteFrame)frame); break;
-            case RequestCode.ENGINE_ROT_GET: result = getRotations((RemoteFrame)frame); break;
-            default :
-
+        if(frame instanceof RemoteFrame) {
+            switch(frame.getId()) {
+                case RequestCode.ENGINE_TEMP : result = getTemperature((RemoteFrame)frame); break;
+                case RequestCode.ENGINE_ROT: result = getRotations((RemoteFrame)frame); break;
+            }
         }
 
         // otherwise, the frame is not a remote frame

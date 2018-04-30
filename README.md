@@ -1,3 +1,3 @@
-# SCS Project : Controller Area Network Simulator, written in Java 9
+# SCS Project : Controller Area Network Simulator, written in Java 8
 
 # CANSimulator

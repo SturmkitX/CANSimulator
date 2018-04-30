@@ -12,7 +12,9 @@ public class BusFactory {
     }
 
     public static void createBus() {
-        buses.add(new Bus());
+        Bus b = new Bus();
+        b.setId(buses.size());
+        buses.add(b);
     }
 
     public static Bus getBus(int index) {
