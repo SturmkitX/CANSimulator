@@ -3,7 +3,7 @@ package frame;
 public class DataFrame extends Frame {
 	
 	private int dataLength;
-	private Object data;	// data can be anything, provided it fits in dataLength bytes
+	private byte[] data;	// data can be anything, provided it fits in dataLength bytes
 	private int crc;
 
 	public DataFrame(int id) {
@@ -14,8 +14,12 @@ public class DataFrame extends Frame {
 		this.dataLength = dataLength;
 	}
 	
-	public void setData(Object data) {
+	public void setData(byte[] data) {
 		this.data = data;
+	}
+
+	public byte[] getData() {
+		return data;
 	}
 
 	public int getDataLength() {

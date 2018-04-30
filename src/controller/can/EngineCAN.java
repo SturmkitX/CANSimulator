@@ -14,6 +14,7 @@ public class EngineCAN extends Controller {
     @Override
     public void update(Observable o, Object arg) {
         Frame frame = (Frame)arg;
+        System.out.println(String.format("CAN Controller received frame at time %s\n", bus.getTime()));
 
         if(!checkError(frame)) {
             return;

@@ -42,7 +42,7 @@ public class Bus extends Observable {
 	}
 
 	public void queueFrame(Frame frame) throws InterruptedException {
-		System.out.println(String.format("Bus %d received frame at %s\n", id, date));
+		System.out.println(String.format("Bus %d received %s at %s\n", id, frame.getClass(), df.format(date)));
 		frames.add(frame);
 		Frame imp = frames.take();
 		setChanged();

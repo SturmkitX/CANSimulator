@@ -30,12 +30,13 @@ public class MainStarter {
 
         // microcontrollers are concurrently-running threads
         // buses, can controllers are event-based
-        Thread engineThread = new Thread(engineMicro);
-
-        engineThread.start();
+//        Thread engineThread = new Thread(engineMicro);
+//
+//        engineThread.start();
+        engineMicro.run();
 
         // send a simple data request
-        RemoteFrame testFrame = new RemoteFrame(RequestCode.ENGINE_TEMP);
+        RemoteFrame testFrame = new RemoteFrame(RequestCode.ENGINE_TEMP_GET);
         testFrame.setDataLength(4);
         engineCAN.write(testFrame);
 
