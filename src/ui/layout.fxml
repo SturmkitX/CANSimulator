@@ -57,6 +57,10 @@
             <items>
                   <MenuItem fx:id="createComponent" mnemonicParsing="false" onAction="#insertComponent" text="Add" />
               <MenuItem fx:id="deleteComponent" mnemonicParsing="false" onAction="#delComponent" text="Delete" />
+                  <MenuItem fx:id="createBusMenu" mnemonicParsing="false" onAction="#createBus" text="Create Bus" />
+                  <MenuItem fx:id="deleteBusMenu" mnemonicParsing="false" onAction="#deleteBus" text="Delete Bus" />
+                  <MenuItem fx:id="attachBusMenu" mnemonicParsing="false" onAction="#attachBus" text="Attach Bus" />
+                  <MenuItem fx:id="detachBusMenu" mnemonicParsing="false" onAction="#detachBus" text="Detach Bus" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

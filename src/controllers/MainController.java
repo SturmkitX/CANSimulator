@@ -64,6 +64,18 @@ public class MainController implements Initializable {
     @FXML // fx:id="aboutMenu"
     private MenuItem aboutMenu; // Value injected by FXMLLoader
 
+    @FXML // fx:id="createBusMenu"
+    private MenuItem createBusMenu; // Value injected by FXMLLoader
+
+    @FXML // fx:id="deleteBusMenu"
+    private MenuItem deleteBusMenu; // Value injected by FXMLLoader
+
+    @FXML // fx:id="attachBusMenu"
+    private MenuItem attachBusMenu; // Value injected by FXMLLoader
+
+    @FXML // fx:id="detachBusMenu"
+    private MenuItem detachBusMenu; // Value injected by FXMLLoader
+
     @FXML
     void closeAction(ActionEvent event) {
         System.exit(0);
@@ -143,7 +155,7 @@ public class MainController implements Initializable {
         componentList = UserSession.getComponents();
         drawnComponents.setItems(componentList);
 
-        BusFactory.createBus();
+//        BusFactory.createBus();
 
         drawnComponents.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ComponentDTO>() {
             @Override
@@ -157,6 +169,66 @@ public class MainController implements Initializable {
         });
 
         logText.textProperty().bind(UserSession.logProperty());
+
+    }
+
+    @FXML
+    void attachBus(ActionEvent event) {
+        if(drawnComponents.getSelectionModel().isEmpty()) {
+            return;
+        }
+
+        UserSession.setCurrentMicro(drawnComponents.getSelectionModel().getSelectedItem());
+
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("../ui/attach_bus.fxml"));
+            Scene scene = new Scene(root);
+
+            Stage stage = new Stage();
+            stage.setTitle("Add component");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void createBus(ActionEvent event) {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("../ui/add_bus.fxml"));
+            Scene scene = new Scene(root);
+
+            Stage stage = new Stage();
+            stage.setTitle("Add component");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @FXML
+    void deleteBus(ActionEvent event) {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("../ui/del_bus.fxml"));
+            Scene scene = new Scene(root);
+
+            Stage stage = new Stage();
+            stage.setTitle("Add component");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void detachBus(ActionEvent event) {
 
     }
 }

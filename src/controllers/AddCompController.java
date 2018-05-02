@@ -1,6 +1,5 @@
 package controllers;
 
-import bus.BusFactory;
 import controller.MicroController;
 import controller.MicroMapper;
 import javafx.event.ActionEvent;
@@ -9,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 import ui.dtos.ComponentDTO;
 import utils.UserSession;
 
@@ -23,9 +23,6 @@ public class AddCompController implements Initializable {
     @FXML // fx:id="addButton"
     private Button addButton; // Value injected by FXMLLoader
 
-    @FXML // fx:id="busIdField"
-    private TextField busIdField; // Value injected by FXMLLoader
-
     @FXML // fx:id="compIdField"
     private TextField compIdField; // Value injected by FXMLLoader
 
@@ -35,6 +32,9 @@ public class AddCompController implements Initializable {
             MicroController cs = (MicroController) Class.forName(choiceBox.getSelectionModel().getSelectedItem()).newInstance();
             cs.initialize(Integer.parseInt(compIdField.getText()));
             UserSession.getComponents().add(new ComponentDTO(cs));
+
+            Stage stage = (Stage) addButton.getScene().getWindow();
+            stage.close();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {

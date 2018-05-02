@@ -45,4 +45,9 @@ public class Bus extends Observable implements Serializable {
 		notifyObservers(imp);
 	}
 
+	public boolean equals(Object o) {
+		Bus b = (Bus)o;
+		return (this.id == ((Bus) o).getId());
+	}
+
 }
