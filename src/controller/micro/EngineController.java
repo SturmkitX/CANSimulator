@@ -18,6 +18,10 @@ public class EngineController extends MicroController {
     private int temperature;
     private int rotations;
 
+    public EngineController() {
+
+    }
+
     public EngineController(int id) {
         super(id);
         timer = new Timer();

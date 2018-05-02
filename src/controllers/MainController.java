@@ -1,7 +1,8 @@
 package controllers;
 
 import bus.BusFactory;
-import controller.sets.ComponentSet;
+import controller.Controller;
+import controller.MicroController;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -37,7 +38,7 @@ public class MainController implements Initializable {
     private Text componentName; // Value injected by FXMLLoader
 
     @FXML // fx:id="componentCanId"
-    private Text componentCanId; // Value injected by FXMLLoader
+    private ComboBox<Integer> componentCanId; // Value injected by FXMLLoader
 
     @FXML // fx:id="componentMicroId"
     private Text componentMicroId; // Value injected by FXMLLoader
@@ -100,16 +101,18 @@ public class MainController implements Initializable {
     void loadObjects(ActionEvent event) {
         try {
             ObjectInput fin = new ObjectInputStream(new FileInputStream("components.ser"));
-            List<ComponentSet> comps = (ArrayList<ComponentSet>) fin.readObject();
+            List<MicroController> comps = (ArrayList<MicroController>) fin.readObject();
             fin.close();
 
             componentList.clear();
-            for(ComponentSet cs : comps) {
-                cs.getMicro().initializeTransientFields();
+            for(MicroController cs : comps) {
+                cs.initializeTransientFields();
 
                 // restore observer states
-                cs.getCan().addObserver(cs.getMicro());
-                cs.getCan().getBus().addObserver(cs.getCan());
+                for(Controller c : cs.getCans()) {
+                    c.addObserver(cs);
+                    c.getBus().addObserver(c);
+                }
                 componentList.add(new ComponentDTO(cs));
             }
         } catch (IOException e) {
@@ -121,7 +124,7 @@ public class MainController implements Initializable {
 
     @FXML
     void saveObjects(ActionEvent event) {
-        List<ComponentSet> comps = new ArrayList<>();
+        List<MicroController> comps = new ArrayList<>();
         for(ComponentDTO dto : componentList) {
             comps.add(dto.getSource());
         }
@@ -147,7 +150,7 @@ public class MainController implements Initializable {
             public void changed(ObservableValue<? extends ComponentDTO> observable, ComponentDTO oldValue, ComponentDTO newValue) {
                 System.out.println(newValue);
                 componentName.setText(newValue.getSource().getClass().getSimpleName());
-                componentCanId.setText("" + newValue.getCanId());
+                componentCanId.setItems(newValue.getCanIds());
                 componentMicroId.setText("" + newValue.getMicroId());
                 componentActions.setItems(newValue.buttonsProperty());
             }

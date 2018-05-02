@@ -13,6 +13,10 @@ import java.util.Observable;
 public class DashboardController extends MicroController {
 
 
+    public DashboardController() {
+
+    }
+
     public DashboardController(int id) {
         super(id);
     }
@@ -50,7 +54,7 @@ public class DashboardController extends MicroController {
     }
 
     @MenuAccess
-    public void requestEngineTemperature() {
+    public void requestEngineTemperature(Controller can) {
         // send a simple data request
         RemoteFrame testFrame = new RemoteFrame(RequestCode.ENGINE_TEMP_GET);
         testFrame.setDataLength(4);

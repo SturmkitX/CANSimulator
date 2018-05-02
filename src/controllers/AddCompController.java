@@ -1,9 +1,8 @@
 package controllers;
 
 import bus.BusFactory;
-import controller.sets.ComponentSet;
-import controller.sets.SetMapper;
-import javafx.beans.property.IntegerProperty;
+import controller.MicroController;
+import controller.MicroMapper;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -33,8 +32,8 @@ public class AddCompController implements Initializable {
     @FXML
     void addComponent(ActionEvent event) {
         try {
-            ComponentSet cs = (ComponentSet) Class.forName(choiceBox.getSelectionModel().getSelectedItem()).newInstance();
-            cs.initialize(Integer.parseInt(compIdField.getText()), BusFactory.getBus(Integer.parseInt(busIdField.getText())));
+            MicroController cs = (MicroController) Class.forName(choiceBox.getSelectionModel().getSelectedItem()).newInstance();
+            cs.initialize(Integer.parseInt(compIdField.getText()));
             UserSession.getComponents().add(new ComponentDTO(cs));
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -47,6 +46,6 @@ public class AddCompController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        choiceBox.getItems().setAll(SetMapper.getClasses());
+        choiceBox.getItems().setAll(MicroMapper.getClasses());
     }
 }

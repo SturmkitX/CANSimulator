@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.Menu?>
@@ -10,7 +11,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.162-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="535.0" prefWidth="841.0" xmlns="http://javafx.com/javafx/8.0.162-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.MainController">
    <children>
       <SplitPane dividerPositions="0.7506702412868632" layoutX="112.0" layoutY="51.0" orientation="VERTICAL" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="25.0">
         <items>
@@ -28,10 +29,10 @@
                               <ListView fx:id="componentActions" layoutX="-18.0" layoutY="7.0" onMouseClicked="#insertComponent" prefHeight="200.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="100.0" />
                               <Label layoutX="14.0" layoutY="14.0" text="Name: " />
                               <Text fx:id="componentName" layoutX="68.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                              <Label layoutX="14.0" layoutY="40.0" text="CAN Id: " />
-                              <Label layoutX="14.0" layoutY="71.0" text="Micro Id: " />
-                              <Text fx:id="componentCanId" layoutX="68.0" layoutY="54.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
-                              <Text fx:id="componentMicroId" layoutX="81.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                              <Label layoutX="14.0" layoutY="40.0" text="Micro Id: " />
+                              <Label layoutX="14.0" layoutY="71.0" text="CAN Id: " />
+                              <Text fx:id="componentMicroId" layoutX="82.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+                              <ComboBox fx:id="componentCanId" layoutX="74.0" layoutY="66.0" prefWidth="150.0" />
                            </children>
                         </AnchorPane>
                     </items>

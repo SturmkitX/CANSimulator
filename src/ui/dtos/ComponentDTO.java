@@ -1,6 +1,7 @@
 package ui.dtos;
 
-import controller.sets.ComponentSet;
+import controller.Controller;
+import controller.MicroController;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
 import javafx.beans.property.SimpleIntegerProperty;
@@ -18,29 +19,46 @@ import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 public class ComponentDTO implements Serializable {
-    private ComponentSet source;
-    private IntegerProperty canId;
+    private MicroController source;
+    private ListProperty<Integer> canIds;
     private IntegerProperty microId;
     private ListProperty<Button> buttons;
 
-    public ComponentDTO(ComponentSet src) {
+    public ComponentDTO(MicroController src) {
         this.source = src;
-        this.canId = new SimpleIntegerProperty(src.getCan().getId());
-        this.microId = new SimpleIntegerProperty(src.getMicro().getId());
+        this.canIds = new SimpleListProperty<>();
+        this.microId = new SimpleIntegerProperty(src.getId());
         this.buttons = new SimpleListProperty<>();
 
-        System.out.println(source.getClass().getSimpleName());
+        // System.out.println(source.getClass().getSimpleName());
+
+        canIds.set(FXCollections.observableList(new ArrayList<>()));
+        for(Controller c : src.getCans()) {
+            canIds.add(c.getId());
+        }
 
         buttons.setValue(FXCollections.observableList(new ArrayList<>()));
         computeButtons();
     }
 
-    public int getCanId() {
-        return canId.get();
+    public MicroController getSource() {
+        return source;
     }
 
-    public IntegerProperty canIdProperty() {
-        return canId;
+    public void setSource(MicroController source) {
+        this.source = source;
+    }
+
+    public ObservableList<Integer> getCanIds() {
+        return canIds.get();
+    }
+
+    public ListProperty<Integer> canIdsProperty() {
+        return canIds;
+    }
+
+    public void setCanIds(ObservableList<Integer> canIds) {
+        this.canIds.set(canIds);
     }
 
     public int getMicroId() {
@@ -51,6 +69,10 @@ public class ComponentDTO implements Serializable {
         return microId;
     }
 
+    public void setMicroId(int microId) {
+        this.microId.set(microId);
+    }
+
     public ObservableList<Button> getButtons() {
         return buttons.get();
     }
@@ -59,16 +81,16 @@ public class ComponentDTO implements Serializable {
         return buttons;
     }
 
-    public ComponentSet getSource() {
-        return source;
+    public void setButtons(ObservableList<Button> buttons) {
+        this.buttons.set(buttons);
     }
 
     public String toString() {
-        return String.format("Class: %s ... CAN Id : %d ... Micro Id : %d\n", source.getClass().getSimpleName(), canId.get(), microId.get());
+        return String.format("Class: %s ... CAN Ids : %s ... Micro Id : %d\n", source.getClass().getSimpleName(), canIds.get(), microId.get());
     }
 
     private void computeButtons() {
-        for(Method m : source.getMicro().getClass().getMethods()) {
+        for(Method m : source.getClass().getMethods()) {
 //            System.out.println(m.getName() + " " + m.getAnnotations().length);
             for(Annotation a : m.getAnnotations()) {
 //                System.out.println(m.getName() + " " + a);
@@ -79,7 +101,7 @@ public class ComponentDTO implements Serializable {
                         @Override
                         public void handle(ActionEvent event) {
                             try {
-                                m.invoke(source.getMicro());
+                                m.invoke(source);
                             } catch (IllegalAccessException e) {
                                 e.printStackTrace();
                             } catch (InvocationTargetException e) {
