@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
+import utils.UserSession;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
@@ -86,7 +87,7 @@ public class ComponentDTO implements Serializable {
     }
 
     public String toString() {
-        return String.format("Class: %s ... CAN Ids : %s ... Micro Id : %d\n", source.getClass().getSimpleName(), canIds.get(), microId.get());
+        return String.format("Class: %s ... Micro Id : %d\n", source.getClass().getSimpleName(), microId.get());
     }
 
     private void computeButtons() {
@@ -101,7 +102,7 @@ public class ComponentDTO implements Serializable {
                         @Override
                         public void handle(ActionEvent event) {
                             try {
-                                m.invoke(source);
+                                m.invoke(source, UserSession.getCurrentBus());
                             } catch (IllegalAccessException e) {
                                 e.printStackTrace();
                             } catch (InvocationTargetException e) {

@@ -10,42 +10,39 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
-import ui.dtos.ComponentDTO;
 import utils.UserSession;
 
 import java.net.URL;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
-public class DeleteBusController implements Initializable {
+public class DetachBusController implements Initializable {
 
     @FXML // fx:id="choiceBox"
     private ComboBox<Integer> choiceBox; // Value injected by FXMLLoader
 
-    @FXML // fx:id="addButton"
-    private Button delButton; // Value injected by FXMLLoader
+    @FXML // fx:id="detachButton"
+    private Button detachButton; // Value injected by FXMLLoader
 
     @FXML
-    void deleteBus(ActionEvent event) {
+    void detachBus(ActionEvent event) {
         if(choiceBox.getSelectionModel().isEmpty()) {
             return;
         }
 
-        // delete all CAN controllers connected to the bus
+        Controller found = null;
         int busId = choiceBox.getValue();
-        for(ComponentDTO cd : UserSession.getComponents()) {
-            for(Controller c : cd.getSource().getCans()) {
-                if(c.getBus().getId() == busId) {
-                    cd.getSource().getCans().remove(c);
-                    cd.canIdsProperty().remove(c.getId());
-                    break;
-                }
+        for(Controller c : UserSession.getCurrentMicro().getSource().getCans()) {
+            if(c.getBus().getId() == busId) {
+                found = c;
+                break;
             }
         }
 
-        BusFactory.deleteBus(busId);
+        UserSession.getCurrentMicro().getSource().getCans().remove(found);
+        UserSession.getCurrentMicro().canIdsProperty().remove(found.getId());
 
-        Stage stage = (Stage) delButton.getScene().getWindow();
+        Stage stage = (Stage) detachButton.getScene().getWindow();
         stage.close();
     }
 
@@ -57,6 +54,5 @@ public class DeleteBusController implements Initializable {
         if(!choiceBox.getItems().isEmpty()) {
             choiceBox.getSelectionModel().select(0);
         }
-
     }
 }

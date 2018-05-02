@@ -14,6 +14,7 @@ public class UserSession {
     private static StringProperty log = new SimpleStringProperty("");
     private static ObservableList<ComponentDTO> components = FXCollections.observableList(new ArrayList<>());
     private static ComponentDTO currentMicro = null;
+    private static int currentBus = 0;
 
     private UserSession() {
 
@@ -41,5 +42,13 @@ public class UserSession {
 
     public static void setCurrentMicro(ComponentDTO currentMicro) {
         UserSession.currentMicro = currentMicro;
+    }
+
+    public static int getCurrentBus() {
+        return currentBus;
+    }
+
+    public static void setCurrentBus(int currentBus) {
+        UserSession.currentBus = currentBus;
     }
 }

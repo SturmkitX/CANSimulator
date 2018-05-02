@@ -1,6 +1,5 @@
 package controllers;
 
-import bus.BusFactory;
 import controller.Controller;
 import controller.MicroController;
 import javafx.beans.value.ChangeListener;
@@ -160,6 +159,10 @@ public class MainController implements Initializable {
         drawnComponents.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<ComponentDTO>() {
             @Override
             public void changed(ObservableValue<? extends ComponentDTO> observable, ComponentDTO oldValue, ComponentDTO newValue) {
+                if(drawnComponents.getSelectionModel().isEmpty()) {
+                    return;
+                }
+
                 System.out.println(newValue);
                 componentName.setText(newValue.getSource().getClass().getSimpleName());
                 componentCanId.setItems(newValue.getCanIds());
@@ -169,6 +172,16 @@ public class MainController implements Initializable {
         });
 
         logText.textProperty().bind(UserSession.logProperty());
+
+        componentCanId.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Integer>() {
+            @Override
+            public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
+                if(!componentCanId.getSelectionModel().isEmpty()) {
+                    UserSession.setCurrentBus(newValue);
+                }
+
+            }
+        });
 
     }
 
@@ -229,6 +242,23 @@ public class MainController implements Initializable {
 
     @FXML
     void detachBus(ActionEvent event) {
+        if(drawnComponents.getSelectionModel().isEmpty()) {
+            return;
+        }
 
+        UserSession.setCurrentMicro(drawnComponents.getSelectionModel().getSelectedItem());
+
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("../ui/del_bus.fxml"));
+            Scene scene = new Scene(root);
+
+            Stage stage = new Stage();
+            stage.setTitle("Add component");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
