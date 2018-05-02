@@ -106,6 +106,10 @@ public class MainController implements Initializable {
             componentList.clear();
             for(ComponentSet cs : comps) {
                 cs.getMicro().initializeTransientFields();
+
+                // restore observer states
+                cs.getCan().addObserver(cs.getMicro());
+                cs.getCan().getBus().addObserver(cs.getCan());
                 componentList.add(new ComponentDTO(cs));
             }
         } catch (IOException e) {

@@ -34,6 +34,10 @@ public abstract class Controller extends Observable implements Observer, Seriali
 		return id;
 	}
 
+	public Bus getBus() {
+		return bus;
+	}
+
 	public void attachBus(Bus bus) {
 		this.bus = bus;
 	}
