@@ -1,5 +1,7 @@
 package controllers;
 
+import bus.Bus;
+import bus.BusFactory;
 import controller.Controller;
 import controller.MicroController;
 import javafx.beans.value.ChangeListener;
@@ -113,7 +115,11 @@ public class MainController implements Initializable {
         try {
             ObjectInput fin = new ObjectInputStream(new FileInputStream("components.ser"));
             List<MicroController> comps = (ArrayList<MicroController>) fin.readObject();
+            List<Bus> buses = (ArrayList<Bus>) fin.readObject();
             fin.close();
+
+            buses.stream().forEach(b -> b.initializeTransient());
+            BusFactory.setBuses(buses);
 
             componentList.clear();
             for(MicroController cs : comps) {
@@ -143,6 +149,7 @@ public class MainController implements Initializable {
         try {
             ObjectOutput fout = new ObjectOutputStream(new FileOutputStream("components.ser"));
             fout.writeObject(comps);
+            fout.writeObject(BusFactory.getBuses());
             fout.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -168,6 +175,8 @@ public class MainController implements Initializable {
                 componentCanId.setItems(newValue.getCanIds());
                 componentMicroId.setText("" + newValue.getMicroId());
                 componentActions.setItems(newValue.buttonsProperty());
+
+                UserSession.setCurrentMicro(newValue);
             }
         });
 
@@ -177,7 +186,7 @@ public class MainController implements Initializable {
             @Override
             public void changed(ObservableValue<? extends Integer> observable, Integer oldValue, Integer newValue) {
                 if(!componentCanId.getSelectionModel().isEmpty()) {
-                    UserSession.setCurrentBus(newValue);
+                    UserSession.setCurrentBus(BusFactory.getBus(newValue));
                 }
 
             }
@@ -191,7 +200,7 @@ public class MainController implements Initializable {
             return;
         }
 
-        UserSession.setCurrentMicro(drawnComponents.getSelectionModel().getSelectedItem());
+
 
         Parent root = null;
         try {
@@ -199,7 +208,7 @@ public class MainController implements Initializable {
             Scene scene = new Scene(root);
 
             Stage stage = new Stage();
-            stage.setTitle("Add component");
+            stage.setTitle("Attach Bus");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
@@ -245,8 +254,6 @@ public class MainController implements Initializable {
         if(drawnComponents.getSelectionModel().isEmpty()) {
             return;
         }
-
-        UserSession.setCurrentMicro(drawnComponents.getSelectionModel().getSelectedItem());
 
         Parent root = null;
         try {

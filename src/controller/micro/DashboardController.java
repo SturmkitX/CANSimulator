@@ -6,6 +6,7 @@ import controller.MicroController;
 import frame.DataFrame;
 import frame.Frame;
 import frame.RemoteFrame;
+import utils.UserSession;
 
 import java.util.Observable;
 
@@ -54,10 +55,19 @@ public class DashboardController extends MicroController {
     }
 
     @MenuAccess
-    public void requestEngineTemperature(Controller can) {
+    public void requestEngineTemperature() {
+        // this part should be hidden
+        Controller found = null;
+        for(Controller c : cans) {
+            if(c.getBus().equals(UserSession.getCurrentBus())) {
+                found = c;
+                break;
+            }
+        }
+
         // send a simple data request
         RemoteFrame testFrame = new RemoteFrame(RequestCode.ENGINE_TEMP_GET);
         testFrame.setDataLength(4);
-        can.write(testFrame);
+        found.write(testFrame);
     }
 }

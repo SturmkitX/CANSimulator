@@ -1,6 +1,6 @@
 package utils;
 
-import controller.MicroController;
+import bus.Bus;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.collections.FXCollections;
@@ -14,7 +14,7 @@ public class UserSession {
     private static StringProperty log = new SimpleStringProperty("");
     private static ObservableList<ComponentDTO> components = FXCollections.observableList(new ArrayList<>());
     private static ComponentDTO currentMicro = null;
-    private static int currentBus = 0;
+    private static Bus currentBus = null;
 
     private UserSession() {
 
@@ -44,11 +44,11 @@ public class UserSession {
         UserSession.currentMicro = currentMicro;
     }
 
-    public static int getCurrentBus() {
+    public static Bus getCurrentBus() {
         return currentBus;
     }
 
-    public static void setCurrentBus(int currentBus) {
+    public static void setCurrentBus(Bus currentBus) {
         UserSession.currentBus = currentBus;
     }
 }

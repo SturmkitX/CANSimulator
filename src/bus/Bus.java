@@ -38,6 +38,8 @@ public class Bus extends Observable implements Serializable {
 	}
 
 	public void queueFrame(Frame frame) throws InterruptedException {
+		df.format(new Date());
+		df.format(date);
 		UserSession.appendLog(String.format("[%s]: Bus %d received %s\n\n", df.format(date), id, frame.getClass()));
 		frames.add(frame);
 		Frame imp = frames.take();
@@ -47,7 +49,13 @@ public class Bus extends Observable implements Serializable {
 
 	public boolean equals(Object o) {
 		Bus b = (Bus)o;
-		return (this.id == ((Bus) o).getId());
+		return (this.id == b.getId());
+	}
+
+	public void initializeTransient() {
+		// static fields are implicitly transient
+		date = new Date();
+		df = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss");
 	}
 
 }

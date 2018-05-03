@@ -102,7 +102,7 @@ public class ComponentDTO implements Serializable {
                         @Override
                         public void handle(ActionEvent event) {
                             try {
-                                m.invoke(source, UserSession.getCurrentBus());
+                                m.invoke(source);
                             } catch (IllegalAccessException e) {
                                 e.printStackTrace();
                             } catch (InvocationTargetException e) {

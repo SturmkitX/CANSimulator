@@ -33,6 +33,10 @@ public class BusFactory {
         return buses;
     }
 
+    public static void setBuses(List<Bus> buses) {
+        BusFactory.buses = buses;
+    }
+
     public static void deleteBus(int id) {
         List<Integer> ids = buses.stream().map(b -> b.getId()).collect(Collectors.toList());
         if(ids.contains(id)) {

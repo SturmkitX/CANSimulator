@@ -1,5 +1,6 @@
 package controllers;
 
+import bus.Bus;
 import bus.BusFactory;
 import controller.Controller;
 import javafx.collections.FXCollections;
@@ -36,9 +37,13 @@ public class AttachBusController implements Initializable {
         }
 
         Controller c = new Controller(0);   // should ask the user for an ID
-        c.attachBus(BusFactory.getBus(choiceBox.getValue()));
+        Bus b = BusFactory.getBus(choiceBox.getValue());
+        c.attachBus(b);
         UserSession.getCurrentMicro().getSource().attachCan(c);
         UserSession.getCurrentMicro().canIdsProperty().add(c.getId());
+
+        b.addObserver(c);
+        c.addObserver(UserSession.getCurrentMicro().getSource());
 
         Stage stage = (Stage) attachButton.getScene().getWindow();
         stage.close();

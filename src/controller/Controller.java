@@ -73,4 +73,9 @@ public class Controller extends Observable implements Observer, Serializable {
 		setChanged();
 		notifyObservers(frame);
 	}
+
+	public boolean equals(Object o) {
+		Controller c = (Controller)o;
+		return (id == c.getId());
+	}
 }
