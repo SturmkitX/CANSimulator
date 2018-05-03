@@ -15,6 +15,7 @@ public class UserSession {
     private static ObservableList<ComponentDTO> components = FXCollections.observableList(new ArrayList<>());
     private static ComponentDTO currentMicro = null;
     private static Bus currentBus = null;
+    private static int canId = 0;
 
     private UserSession() {
 
@@ -50,5 +51,9 @@ public class UserSession {
 
     public static void setCurrentBus(Bus currentBus) {
         UserSession.currentBus = currentBus;
+    }
+
+    public static int generateCanId() {
+        return canId++;
     }
 }

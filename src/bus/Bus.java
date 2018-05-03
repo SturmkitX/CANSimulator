@@ -43,6 +43,7 @@ public class Bus extends Observable implements Serializable {
 		UserSession.appendLog(String.format("[%s]: Bus %d received %s\n\n", df.format(date), id, frame.getClass()));
 		frames.add(frame);
 		Frame imp = frames.take();
+
 		setChanged();
 		notifyObservers(imp);
 	}

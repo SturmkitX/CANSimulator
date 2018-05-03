@@ -34,12 +34,11 @@ public class DeleteBusController implements Initializable {
         // delete all CAN controllers connected to the bus
         int busId = choiceBox.getValue();
         for(ComponentDTO cd : UserSession.getComponents()) {
-            for(Controller c : cd.getSource().getCans()) {
-                if(c.getBus().getId() == busId) {
-                    cd.getSource().getCans().remove(c);
-                    cd.canIdsProperty().remove(c.getId());
-                    break;
-                }
+            if(cd.getSource().getCans().containsKey(busId)) {
+                Controller c = cd.getSource().getCans().get(busId);
+                cd.getSource().getCans().remove(busId);
+                cd.canIdsProperty().remove(c.getId());
+                break;
             }
         }
 

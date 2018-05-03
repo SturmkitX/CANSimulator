@@ -37,6 +37,8 @@ public class DashboardController extends MicroController {
         Frame frame = (Frame)arg;
         Frame result = null;
 
+        UserSession.appendLog(String.format("%s ID: %d received frame %s\n", getClass().getSimpleName(), id, frame.getClass().getName()));
+
         // send the correct data to the microcontroller, based on request or data
         if(frame instanceof RemoteFrame) {
             switch(frame.getId()) {
@@ -57,13 +59,7 @@ public class DashboardController extends MicroController {
     @MenuAccess
     public void requestEngineTemperature() {
         // this part should be hidden
-        Controller found = null;
-        for(Controller c : cans) {
-            if(c.getBus().equals(UserSession.getCurrentBus())) {
-                found = c;
-                break;
-            }
-        }
+        Controller found = cans.get(UserSession.getCurrentBus().getId());
 
         // send a simple data request
         RemoteFrame testFrame = new RemoteFrame(RequestCode.ENGINE_TEMP_GET);

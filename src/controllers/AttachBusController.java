@@ -36,10 +36,10 @@ public class AttachBusController implements Initializable {
             return;
         }
 
-        Controller c = new Controller(0);   // should ask the user for an ID
+        Controller c = new Controller(UserSession.generateCanId());   // should ask the user for an ID
         Bus b = BusFactory.getBus(choiceBox.getValue());
         c.attachBus(b);
-        UserSession.getCurrentMicro().getSource().attachCan(c);
+        UserSession.getCurrentMicro().getSource().attachCan(b.getId(), c);
         UserSession.getCurrentMicro().canIdsProperty().add(c.getId());
 
         b.addObserver(c);
@@ -52,10 +52,14 @@ public class AttachBusController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         ObservableList<Integer> ids = FXCollections.observableList(BusFactory.getBuses().stream().map(b -> b.getId()).collect(Collectors.toList()));
-        ObservableList<Integer> attached = FXCollections.observableList(new ArrayList<>());
+        ObservableList<Integer> attached = FXCollections.observableList(UserSession.getCurrentMicro().getSource().getCans().keySet().stream().collect(Collectors.toList()));
 
-        UserSession.getCurrentMicro().getSource().getCans().stream().forEach(c -> attached.add(c.getBus().getId()));
-        ids.remove(attached);
+        System.out.println("ids: " + ids);
+        System.out.println("remove:" + attached);
+
+        ids.removeAll(attached);
+
+        System.out.println("ids: " + ids);
 
         choiceBox.setItems(ids);
 

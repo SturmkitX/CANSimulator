@@ -6,6 +6,7 @@ import controller.MicroController;
 import frame.DataFrame;
 import frame.Frame;
 import frame.RemoteFrame;
+import utils.UserSession;
 
 import java.nio.ByteBuffer;
 import java.util.Observable;
@@ -57,6 +58,9 @@ public class EngineController extends MicroController {
     public void update(Observable o, Object arg) {
         Frame frame = (Frame)arg;
         Frame result = null;
+
+        UserSession.appendLog(String.format("%s ID: %d received frame %s\n", getClass().getSimpleName(), id, frame.getClass().getName()));
+
 
         // send the correct data to the microcontroller, based on request or data
         if(frame instanceof RemoteFrame) {

@@ -1,14 +1,12 @@
 package controller;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Observer;
+import java.util.*;
 
 public abstract class MicroController implements Observer, Runnable, Serializable {
 	
 	protected int id;
-	protected List<Controller> cans;
+	protected Map<Integer, Controller> cans;
 
 	public MicroController() {
 
@@ -16,20 +14,20 @@ public abstract class MicroController implements Observer, Runnable, Serializabl
 	
 	public MicroController(int id) {
 		this.id = id;
-		this.cans = new ArrayList<>();
+		this.cans = new HashMap<>();
 	}
 
 	public void initialize(int id) {
 	    this.id = id;
-	    this.cans = new ArrayList<>();
+	    this.cans = new HashMap<>();
     }
 
-	public List<Controller> getCans() {
+	public Map<Integer, Controller> getCans() {
 		return cans;
 	}
 
-	public void attachCan(Controller can) {
-		this.cans.add(can);
+	public void attachCan(int busId, Controller can) {
+		this.cans.put(busId, can);
 	}
 
 	public int getId() {

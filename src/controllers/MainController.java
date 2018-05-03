@@ -126,7 +126,7 @@ public class MainController implements Initializable {
                 cs.initializeTransientFields();
 
                 // restore observer states
-                for(Controller c : cs.getCans()) {
+                for(Controller c : cs.getCans().values()) {
                     c.addObserver(cs);
                     c.getBus().addObserver(c);
                 }
@@ -257,7 +257,7 @@ public class MainController implements Initializable {
 
         Parent root = null;
         try {
-            root = FXMLLoader.load(getClass().getResource("../ui/del_bus.fxml"));
+            root = FXMLLoader.load(getClass().getResource("../ui/detach_bus.fxml"));
             Scene scene = new Scene(root);
 
             Stage stage = new Stage();

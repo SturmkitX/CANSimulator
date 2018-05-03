@@ -34,7 +34,7 @@ public class ComponentDTO implements Serializable {
         // System.out.println(source.getClass().getSimpleName());
 
         canIds.set(FXCollections.observableList(new ArrayList<>()));
-        for(Controller c : src.getCans()) {
+        for(Controller c : src.getCans().values()) {
             canIds.add(c.getId());
         }
 
