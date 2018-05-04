@@ -15,6 +15,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.Text;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import ui.dtos.ComponentDTO;
 import utils.UserSession;
@@ -116,7 +117,16 @@ public class MainController implements Initializable {
     @FXML
     void loadObjects(ActionEvent event) {
         try {
-            ObjectInput fin = new ObjectInputStream(new FileInputStream("components.ser"));
+            // open file chooser and select a file
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Choose object file");
+            Stage stage = (Stage) componentCanId.getScene().getWindow();
+            File file = fileChooser.showOpenDialog(stage);
+            if(file == null) {
+                return;
+            }
+
+            ObjectInput fin = new ObjectInputStream(new FileInputStream(file));
             List<MicroController> comps = (ArrayList<MicroController>) fin.readObject();
             List<Bus> buses = (ArrayList<Bus>) fin.readObject();
             fin.close();
@@ -150,7 +160,16 @@ public class MainController implements Initializable {
         }
 
         try {
-            ObjectOutput fout = new ObjectOutputStream(new FileOutputStream("components.ser"));
+            // open file chooser and select a file
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("Choose object file");
+            Stage stage = (Stage) componentCanId.getScene().getWindow();
+            File file = fileChooser.showSaveDialog(stage);
+            if(file == null) {
+                return;
+            }
+
+            ObjectOutput fout = new ObjectOutputStream(new FileOutputStream(file));
             fout.writeObject(comps);
             fout.writeObject(BusFactory.getBuses());
             fout.close();

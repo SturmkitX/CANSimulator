@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d3775817-ef5f-4c4f-a27e-99a77f4c7936" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components.ser" beforeDir="false" afterPath="$PROJECT_DIR$/components.ser" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controller/micro/DashboardController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controller/micro/DashboardController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/AddCompController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/AddCompController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/AttachBusController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/AttachBusController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/DeleteBusController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/DeleteBusController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/DetachBusController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/DetachBusController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/add_comp.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/add_comp.fxml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/ui/layout.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/ui/layout.fxml" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -47,11 +38,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CanViewController.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="CanViewController.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/controllers/CanViewController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="444">
-              <caret line="43" column="87" selection-start-line="43" selection-start-column="87" selection-end-line="43" selection-end-column="87" />
+            <state relative-caret-position="223">
+              <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -59,11 +50,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainController.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainController.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/controllers/MainController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="274">
-              <caret line="280" lean-forward="true" selection-start-line="280" selection-end-line="280" />
+            <state relative-caret-position="221">
+              <caret line="158" column="16" lean-forward="true" selection-start-line="158" selection-start-column="16" selection-end-line="158" selection-end-column="16" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -215,8 +206,8 @@
         <option value="$PROJECT_DIR$/src/controllers/DeleteBusController.java" />
         <option value="$PROJECT_DIR$/src/controllers/AddCompController.java" />
         <option value="$PROJECT_DIR$/src/ui/dtos/CanViewDTO.java" />
-        <option value="$PROJECT_DIR$/src/controllers/MainController.java" />
         <option value="$PROJECT_DIR$/src/controllers/CanViewController.java" />
+        <option value="$PROJECT_DIR$/src/controllers/MainController.java" />
       </list>
     </option>
   </component>
@@ -444,7 +435,7 @@
       <window_info anchor="right" id="Capture Analysis" order="3" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
       <window_info anchor="right" id="Maven Projects" order="3" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.34961998" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.34961998" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info id="Capture Tool" order="2" />
@@ -803,16 +794,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/controllers/MainController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="274">
-          <caret line="280" lean-forward="true" selection-start-line="280" selection-end-line="280" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/ui/dtos/CanViewDTO.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -836,8 +817,18 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/controllers/CanViewController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="444">
-          <caret line="43" column="87" selection-start-line="43" selection-start-column="87" selection-end-line="43" selection-end-column="87" />
+        <state relative-caret-position="223">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/controllers/MainController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="158" column="16" lean-forward="true" selection-start-line="158" selection-start-column="16" selection-end-line="158" selection-end-column="16" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
