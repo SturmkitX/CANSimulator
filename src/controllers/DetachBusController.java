@@ -1,5 +1,7 @@
 package controllers;
 
+import bus.Bus;
+import bus.BusFactory;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,6 +26,7 @@ public class DetachBusController implements Initializable {
 
     @FXML
     void detachBus(ActionEvent event) {
+        System.out.println("Detaching bus");
         if(choiceBox.getSelectionModel().isEmpty()) {
             return;
         }
@@ -31,7 +34,7 @@ public class DetachBusController implements Initializable {
 
         int busId = choiceBox.getValue();
         UserSession.getCurrentMicro().getSource().getCans().remove(busId);
-        UserSession.getCurrentMicro().busIdsProperty().remove(busId);
+        UserSession.getCurrentMicro().busIdsProperty().remove(new Integer(busId));
 
         Stage stage = (Stage) detachButton.getScene().getWindow();
         stage.close();

@@ -8,6 +8,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import ui.dtos.ComponentDTO;
 import utils.UserSession;
@@ -27,10 +28,15 @@ public class AddCompController implements Initializable {
     private TextField compIdField; // Value injected by FXMLLoader
 
     @FXML
+    private Text status;
+
+    @FXML
     void addComponent(ActionEvent event) {
         try {
+            int csId = Integer.parseInt(compIdField.getText());
+
             MicroController cs = (MicroController) Class.forName(choiceBox.getSelectionModel().getSelectedItem()).newInstance();
-            cs.initialize(Integer.parseInt(compIdField.getText()));
+            cs.initialize(csId);
             cs.initializeTransientFields();
             UserSession.getComponents().add(new ComponentDTO(cs));
 
@@ -38,6 +44,8 @@ public class AddCompController implements Initializable {
 
             Stage stage = (Stage) addButton.getScene().getWindow();
             stage.close();
+        } catch(NumberFormatException e) {
+            status.setText("ID must be a number!");
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         } catch (IllegalAccessException e) {
@@ -50,5 +58,9 @@ public class AddCompController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         choiceBox.getItems().setAll(MicroMapper.getClasses());
+
+        if(!choiceBox.getItems().isEmpty()) {
+            choiceBox.getSelectionModel().select(0);
+        }
     }
 }

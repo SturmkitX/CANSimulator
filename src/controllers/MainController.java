@@ -77,6 +77,9 @@ public class MainController implements Initializable {
     @FXML // fx:id="detachBusMenu"
     private MenuItem detachBusMenu; // Value injected by FXMLLoader
 
+    @FXML // fx:id="attachmentMenu"
+    private MenuItem attachmentMenu; // Value injected by FXMLLoader
+
     @FXML
     void closeAction(ActionEvent event) {
         System.exit(0);
@@ -224,7 +227,7 @@ public class MainController implements Initializable {
             Scene scene = new Scene(root);
 
             Stage stage = new Stage();
-            stage.setTitle("Add component");
+            stage.setTitle("Add bus");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
@@ -241,7 +244,7 @@ public class MainController implements Initializable {
             Scene scene = new Scene(root);
 
             Stage stage = new Stage();
-            stage.setTitle("Add component");
+            stage.setTitle("Delete bus");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
@@ -261,7 +264,23 @@ public class MainController implements Initializable {
             Scene scene = new Scene(root);
 
             Stage stage = new Stage();
-            stage.setTitle("Add component");
+            stage.setTitle("Detach bus");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void viewAttachments(ActionEvent event) {
+        Parent root = null;
+        try {
+            root = FXMLLoader.load(getClass().getResource("../ui/view_cans.fxml"));
+            Scene scene = new Scene(root);
+
+            Stage stage = new Stage();
+            stage.setTitle("View attachments");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

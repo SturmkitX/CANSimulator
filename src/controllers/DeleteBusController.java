@@ -35,7 +35,7 @@ public class DeleteBusController implements Initializable {
         for(ComponentDTO cd : UserSession.getComponents()) {
             if(cd.getSource().getCans().containsKey(busId)) {
                 cd.getSource().getCans().remove(busId);
-                cd.busIdsProperty().remove(busId);
+                cd.busIdsProperty().remove(new Integer(busId));
                 break;
             }
         }

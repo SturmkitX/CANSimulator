@@ -36,6 +36,7 @@ public class AttachBusController implements Initializable {
         }
 
         Controller c = new Controller(UserSession.generateCanId());   // should ask the user for an ID
+        c.setName(UserSession.getCurrentMicro().getSource().getClass().getSimpleName());
         Bus b = BusFactory.getBus(choiceBox.getValue());
         c.attachBus(b);
         UserSession.getCurrentMicro().getSource().attachCan(b.getId(), c);

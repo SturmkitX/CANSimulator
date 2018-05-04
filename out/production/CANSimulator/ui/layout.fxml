@@ -61,6 +61,7 @@
                   <MenuItem fx:id="deleteBusMenu" mnemonicParsing="false" onAction="#deleteBus" text="Delete Bus" />
                   <MenuItem fx:id="attachBusMenu" mnemonicParsing="false" onAction="#attachBus" text="Attach Bus" />
                   <MenuItem fx:id="detachBusMenu" mnemonicParsing="false" onAction="#detachBus" text="Detach Bus" />
+                  <MenuItem fx:id="attachmentMenu" mnemonicParsing="false" onAction="#viewAttachments" text="View Attachments" />
             </items>
           </Menu>
           <Menu mnemonicParsing="false" text="Help">

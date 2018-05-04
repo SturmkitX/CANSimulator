@@ -59,6 +59,9 @@ public class DashboardController extends MicroController {
     @MenuAccess
     public void requestEngineTemperature() {
         // this part should be hidden
+        if(UserSession.getCurrentBus() == null) {
+            return;
+        }
         Controller found = cans.get(UserSession.getCurrentBus().getId());
 
         // send a simple data request
