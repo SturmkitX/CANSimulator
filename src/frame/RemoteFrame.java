@@ -1,9 +1,11 @@
 package frame;
 
+import java.nio.ByteBuffer;
+import java.util.zip.CRC32;
+
 public class RemoteFrame extends Frame {
 	
 	private int dataLength;
-	private int crc;
 
 	public RemoteFrame(short id) {
 		super(id);
@@ -17,14 +19,17 @@ public class RemoteFrame extends Frame {
 		return dataLength;
 	}
 
-	public int getCrc() {
-		return crc;
-	}
-
 	@Override
-	protected void computeMessage() {
-		// TODO Auto-generated method stub
-		
+	public int computeCrc() {
+		ByteBuffer bf = ByteBuffer.allocate(9);
+		bf.put((byte)1);
+		bf.putInt(id);
+		bf.putInt(dataLength);
+
+		CRC32 crc = new CRC32();
+		crc.update(bf);
+
+		return (int)crc.getValue();
 	}
 
 }

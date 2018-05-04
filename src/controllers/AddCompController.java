@@ -31,7 +31,10 @@ public class AddCompController implements Initializable {
         try {
             MicroController cs = (MicroController) Class.forName(choiceBox.getSelectionModel().getSelectedItem()).newInstance();
             cs.initialize(Integer.parseInt(compIdField.getText()));
+            cs.initializeTransientFields();
             UserSession.getComponents().add(new ComponentDTO(cs));
+
+            new Thread(cs).start();
 
             Stage stage = (Stage) addButton.getScene().getWindow();
             stage.close();

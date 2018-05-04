@@ -30,7 +30,7 @@
                               <Label layoutX="14.0" layoutY="14.0" text="Name: " />
                               <Text fx:id="componentName" layoutX="68.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                               <Label layoutX="14.0" layoutY="40.0" text="Micro Id: " />
-                              <Label layoutX="14.0" layoutY="71.0" text="CAN Id: " />
+                              <Label layoutX="14.0" layoutY="71.0" text="Bus Id: " />
                               <Text fx:id="componentMicroId" layoutX="82.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
                               <ComboBox fx:id="componentCanId" layoutX="74.0" layoutY="66.0" prefWidth="150.0" />
                            </children>

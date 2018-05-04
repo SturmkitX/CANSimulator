@@ -1,6 +1,7 @@
 package bus;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -21,7 +22,7 @@ public class BusFactory {
     public static Bus getBus(int index) {
         Bus found = null;
         try {
-            found = buses.get(index);
+            found = buses.stream().filter(b -> b.getId() == index).collect(Collectors.toList()).get(0);
         } catch(IndexOutOfBoundsException e) {
             e.printStackTrace();
         }

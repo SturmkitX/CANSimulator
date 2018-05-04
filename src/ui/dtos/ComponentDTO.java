@@ -1,6 +1,5 @@
 package ui.dtos;
 
-import controller.Controller;
 import controller.MicroController;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.property.ListProperty;
@@ -11,7 +10,6 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
-import utils.UserSession;
 
 import java.io.Serializable;
 import java.lang.annotation.Annotation;
@@ -21,21 +19,21 @@ import java.util.ArrayList;
 
 public class ComponentDTO implements Serializable {
     private MicroController source;
-    private ListProperty<Integer> canIds;
+    private ListProperty<Integer> busIds;
     private IntegerProperty microId;
     private ListProperty<Button> buttons;
 
     public ComponentDTO(MicroController src) {
         this.source = src;
-        this.canIds = new SimpleListProperty<>();
+        this.busIds = new SimpleListProperty<>();
         this.microId = new SimpleIntegerProperty(src.getId());
         this.buttons = new SimpleListProperty<>();
 
         // System.out.println(source.getClass().getSimpleName());
 
-        canIds.set(FXCollections.observableList(new ArrayList<>()));
-        for(Controller c : src.getCans().values()) {
-            canIds.add(c.getId());
+        busIds.set(FXCollections.observableList(new ArrayList<>()));
+        for(int c : src.getCans().keySet()) {
+            busIds.add(c);
         }
 
         buttons.setValue(FXCollections.observableList(new ArrayList<>()));
@@ -50,16 +48,16 @@ public class ComponentDTO implements Serializable {
         this.source = source;
     }
 
-    public ObservableList<Integer> getCanIds() {
-        return canIds.get();
+    public ObservableList<Integer> getBusIds() {
+        return busIds.get();
     }
 
-    public ListProperty<Integer> canIdsProperty() {
-        return canIds;
+    public ListProperty<Integer> busIdsProperty() {
+        return busIds;
     }
 
-    public void setCanIds(ObservableList<Integer> canIds) {
-        this.canIds.set(canIds);
+    public void setBusIds(ObservableList<Integer> busIds) {
+        this.busIds.set(busIds);
     }
 
     public int getMicroId() {

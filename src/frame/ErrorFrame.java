@@ -9,15 +9,16 @@ public class ErrorFrame extends Frame {
 	public ErrorFrame() {
 		super(RequestCode.ERROR);
 	}
-	
+
+	@Override
+	public int computeCrc() {
+		return 0;
+	}
+
 	public void setActive(boolean active) {
 		this.isActive = active;
 	}
 
-	@Override
-	protected void computeMessage() {
-		// TODO Auto-generated method stub
-		
-	}
+
 
 }

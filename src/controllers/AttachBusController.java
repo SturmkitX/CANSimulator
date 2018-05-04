@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 import utils.UserSession;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
@@ -40,7 +39,7 @@ public class AttachBusController implements Initializable {
         Bus b = BusFactory.getBus(choiceBox.getValue());
         c.attachBus(b);
         UserSession.getCurrentMicro().getSource().attachCan(b.getId(), c);
-        UserSession.getCurrentMicro().canIdsProperty().add(c.getId());
+        UserSession.getCurrentMicro().busIdsProperty().add(b.getId());
 
         b.addObserver(c);
         c.addObserver(UserSession.getCurrentMicro().getSource());

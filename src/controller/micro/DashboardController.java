@@ -37,7 +37,7 @@ public class DashboardController extends MicroController {
         Frame frame = (Frame)arg;
         Frame result = null;
 
-        UserSession.appendLog(String.format("%s ID: %d received frame %s\n", getClass().getSimpleName(), id, frame.getClass().getName()));
+        UserSession.appendLog(String.format("[%s] %s ID: %d received frame %s\n\n", ((Controller)o).getBus().getTime(), getClass().getSimpleName(), id, frame.getClass().getName()));
 
         // send the correct data to the microcontroller, based on request or data
         if(frame instanceof RemoteFrame) {
@@ -64,6 +64,8 @@ public class DashboardController extends MicroController {
         // send a simple data request
         RemoteFrame testFrame = new RemoteFrame(RequestCode.ENGINE_TEMP_GET);
         testFrame.setDataLength(4);
+        testFrame.setCrc(testFrame.computeCrc());
         found.write(testFrame);
     }
+
 }

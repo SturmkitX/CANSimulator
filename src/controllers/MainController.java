@@ -172,7 +172,7 @@ public class MainController implements Initializable {
 
                 System.out.println(newValue);
                 componentName.setText(newValue.getSource().getClass().getSimpleName());
-                componentCanId.setItems(newValue.getCanIds());
+                componentCanId.setItems(newValue.getBusIds());
                 componentMicroId.setText("" + newValue.getMicroId());
                 componentActions.setItems(newValue.buttonsProperty());
 

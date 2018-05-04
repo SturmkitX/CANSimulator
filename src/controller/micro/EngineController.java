@@ -59,7 +59,7 @@ public class EngineController extends MicroController {
         Frame frame = (Frame)arg;
         Frame result = null;
 
-        UserSession.appendLog(String.format("%s ID: %d received frame %s\n", getClass().getSimpleName(), id, frame.getClass().getName()));
+        UserSession.appendLog(String.format("[%s] %s ID: %d received frame %s\n\n", ((Controller)o).getBus().getTime(), getClass().getSimpleName(), id, frame.getClass().getName()));
 
 
         // send the correct data to the microcontroller, based on request or data
@@ -87,6 +87,7 @@ public class EngineController extends MicroController {
         result.setDataLength(src.getDataLength());
         byte[] data = ByteBuffer.allocate(src.getDataLength()).putInt(temperature).array();
         result.setData(data);
+        result.setCrc(result.computeCrc());
         return result;
     }
 
@@ -95,6 +96,7 @@ public class EngineController extends MicroController {
         result.setDataLength(src.getDataLength());
         byte[] data = ByteBuffer.allocate(src.getDataLength()).putInt(rotations).array();
         result.setData(data);
+        result.setCrc(result.computeCrc());
         return result;
     }
 

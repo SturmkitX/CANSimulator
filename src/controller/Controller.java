@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.*;
 
 import bus.Bus;
+import frame.ErrorFrame;
 import frame.Frame;
 import utils.UserSession;
 
@@ -26,9 +27,8 @@ public class Controller extends Observable implements Observer, Serializable {
 		this.name = name;
 	}
 
-	protected boolean checkError(Frame frame) {
-		// TODO
-		return true;
+	private boolean checkError(Frame frame) {
+		return (frame.getCrc() == frame.computeCrc());
 	}
 
 	public void write(Frame frame) {
@@ -66,6 +66,11 @@ public class Controller extends Observable implements Observer, Serializable {
 		UserSession.appendLog(String.format("[%s]: %s CAN Controller received frame\n\n", bus.getTime(), name));
 
 		if(!checkError(frame)) {
+			// send error frame
+			UserSession.appendLog(String.format("[%s]: %s CAN Controller detected error\n\n", bus.getTime(), name));
+			ErrorFrame errFrame = new ErrorFrame();
+			errFrame.setActive(true);
+			write(errFrame);
 			return;
 		}
 

@@ -12,23 +12,14 @@ public abstract class Frame implements Comparable<Frame>, Serializable {
 	 */
 
 	protected int id;
-	
-	protected byte[] message;
-	
+	protected int crc;
+
 	public Frame() {
-		this.message = null;
 		this.id = MAX_AVAILABLE_ID;
 	}
 
 	public Frame(int id) {
-		this.message = null;
 		this.id = id;
-	}
-	
-	protected abstract void computeMessage();
-	
-	public byte[] getMessage() {
-		return message;
 	}
 
 	public int getId() {
@@ -37,5 +28,15 @@ public abstract class Frame implements Comparable<Frame>, Serializable {
 
 	public int compareTo(Frame o) {
 		return (id - o.getId());
+	}
+
+	public abstract int computeCrc();
+
+	public int getCrc() {
+		return crc;
+	}
+
+	public void setCrc(int crc) {
+		this.crc = crc;
 	}
 }

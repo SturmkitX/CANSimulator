@@ -1,7 +1,6 @@
 package controllers;
 
 import bus.BusFactory;
-import controller.Controller;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -35,9 +34,8 @@ public class DeleteBusController implements Initializable {
         int busId = choiceBox.getValue();
         for(ComponentDTO cd : UserSession.getComponents()) {
             if(cd.getSource().getCans().containsKey(busId)) {
-                Controller c = cd.getSource().getCans().get(busId);
                 cd.getSource().getCans().remove(busId);
-                cd.canIdsProperty().remove(c.getId());
+                cd.busIdsProperty().remove(busId);
                 break;
             }
         }

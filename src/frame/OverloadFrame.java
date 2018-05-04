@@ -9,15 +9,14 @@ public class OverloadFrame extends Frame {
 	public OverloadFrame() {
 		super(RequestCode.OVERLOAD);
 	}
-	
-	public void setActive(boolean active) {
-		this.isActive = active;
-	}
 
 	@Override
-	protected void computeMessage() {
-		// TODO Auto-generated method stub
-		
+	public int computeCrc() {
+		return 0;
+	}
+
+	public void setActive(boolean active) {
+		this.isActive = active;
 	}
 
 }

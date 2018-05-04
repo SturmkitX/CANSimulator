@@ -40,7 +40,7 @@ public class Bus extends Observable implements Serializable {
 	public void queueFrame(Frame frame) throws InterruptedException {
 		df.format(new Date());
 		df.format(date);
-		UserSession.appendLog(String.format("[%s]: Bus %d received %s\n\n", df.format(date), id, frame.getClass()));
+		UserSession.appendLog(String.format("[%s]: Bus %d received %s\n\n", getTime(), id, frame.getClass()));
 		frames.add(frame);
 		Frame imp = frames.take();
 
