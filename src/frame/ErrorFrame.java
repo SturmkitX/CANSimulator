@@ -3,9 +3,7 @@ package frame;
 import codes.RequestCode;
 
 public class ErrorFrame extends Frame {
-	
-	private boolean isActive;
-	
+
 	public ErrorFrame() {
 		super(RequestCode.ERROR);
 	}
@@ -14,11 +12,6 @@ public class ErrorFrame extends Frame {
 	public int computeCrc() {
 		return 0;
 	}
-
-	public void setActive(boolean active) {
-		this.isActive = active;
-	}
-
 
 
 }

@@ -35,6 +35,16 @@ public class AddCompController implements Initializable {
         try {
             int csId = Integer.parseInt(compIdField.getText());
 
+            if(csId < 0) {
+                status.setText("ID must be a positive number");
+                return;
+            }
+
+            if(UserSession.getComponents().stream().filter(c -> c.getMicroId() == csId).count() > 0) {
+                status.setText("There already exists a MicroController with the specified ID");
+                return;
+            }
+
             MicroController cs = (MicroController) Class.forName(choiceBox.getSelectionModel().getSelectedItem()).newInstance();
             cs.initialize(csId);
             cs.initializeTransientFields();

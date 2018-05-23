@@ -24,7 +24,7 @@ public class BusFactory {
         try {
             found = buses.stream().filter(b -> b.getId() == index).collect(Collectors.toList()).get(0);
         } catch(IndexOutOfBoundsException e) {
-            e.printStackTrace();
+            // e.printStackTrace();
         }
 
         return found;

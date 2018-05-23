@@ -69,7 +69,6 @@ public class Controller extends Observable implements Observer, Serializable {
 			// send error frame
 			UserSession.appendLog(String.format("[%s]: %s CAN Controller detected error\n\n", bus.getTime(), name));
 			ErrorFrame errFrame = new ErrorFrame();
-			errFrame.setActive(true);
 			write(errFrame);
 			return;
 		}
